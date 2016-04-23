@@ -109,13 +109,30 @@
     arraySortedDicKeys=[arraySortedDicKeys sortedArrayUsingDescriptors:@[ sortOrder ]];
     
     
-    CGFloat heightMainLoadingIndicator = (Size.height*arraySortedDicKeys.count)>5450? 5450: (Size.height*arraySortedDicKeys.count);
+    CGFloat heightMainLoadingIndicator ;//= (Size.height*arraySortedDicKeys.count)>5450? 5450: (Size.height*arraySortedDicKeys.count);
+    
+    
+    if ((Size.height*arraySortedDicKeys.count)>3000) {
+        heightMainLoadingIndicator = 3000;
+        
+        UIView* viewAdded = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - ((FactX*8)/2), 3000, FactX* 8,  5000)];
+        viewAdded.backgroundColor =  UIColorFromRGB(0x7e7c7d);
+        
+        [scrollView addSubview:viewAdded];
+        
+
+        
+    }
+    
+    else{
+        heightMainLoadingIndicator = Size.height*arraySortedDicKeys.count;
+    }
     
     UIView* viewMainLoadingIndicator = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - ((FactX*8)/2), FactY* 110, FactX* 8,  heightMainLoadingIndicator )];
     viewMainLoadingIndicator.backgroundColor = UIColorFromRGB(0x7e7c7d);
     viewMainLoadingIndicator.tag = 250;
     
-    //[scrollView addSubview:viewMainLoadingIndicator];
+    [scrollView addSubview:viewMainLoadingIndicator];
     
     
   UIView* viewSubLoadingIndicator = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 - ((FactX*8)/2), FactY* 30, FactX* 8, FactY * Size.height*3 - 20)];
